@@ -1,0 +1,237 @@
+generated: '2026-09-13'
+method: searched
+source: https://map.aibee.cn/sdk-docs/
+description: >-
+  Aibee's public developer surface is client-side, not server-side: instead of a REST platform it
+  ships embeddable map / AR / navigation components that a customer drops into a web page, a
+  WeChat mini-program, or a React Native app, and which then talk to Aibee's hosted map-data
+  services. This file catalogs those components from the public SDK reference at
+  map.aibee.cn/sdk-docs (VuePress 1.8.2, server-rendered), the generated TypeDoc reference at
+  map.aibee.cn/sdk-docs/bmap/docs/, and the READMEs shipped inside the published @aibee npm
+  packages. Distinct from packages/aibee-packages.yml, which records distribution and currency.
+families:
+- family: Indoor map rendering
+  loader: npm
+  components:
+  - name: BMap
+    package: "@aibee/bmap"
+    docs: https://map.aibee.cn/sdk-docs/bmap/docs/
+    docs_status: 200
+    kind: web (three.js / WebGL canvas)
+    mount: 'new BMap(container: HTMLElement, { place_id, floor_id })'
+    description: >-
+      3D indoor map component for a shopping mall, parking garage or office tower. Renders floor
+      geometry, a POI layer, a routing graph and a heatmap layer; supports floor switching,
+      selection, rotation limits, touch enable/disable and a Navigation overlay.
+    surface:
+      exports:
+      - BMap
+      - Navigation
+      - Config
+      - BrowserUtil
+      - Poi
+      - Polygon
+      - GraphicElement
+      - LayerType
+      - DataModeType
+      - DataEventEnum
+      events:
+      - DataEventEnum.MapLoaded
+      layer_types:
+      - Graphic
+      - POI
+      data_modes:
+      - Standard
+      - External
+    data_hosts:
+    - https://deploy.aibee.cn
+    - https://guide-admin.aibee.cn
+  - name: crc-bmap
+    package: "@aibee/crc-bmap"
+    kind: web (three.js / WebGL canvas)
+    description: >-
+      Customer-specific build of the BMap renderer. Adds turf geometry, node-dijkstra routing,
+      meshline and a mars3d heatmap. No public reference published.
+    docs: null
+  - name: map2d
+    package: "@aibee/map2d"
+    kind: web (OpenLayers 2D canvas)
+    description: >-
+      2D floor-plan map component and editor built on OpenLayers with turf, ol-ext and a
+      dxf-parser for ingesting CAD floor plans. Siblings @aibee/map2d-aibee and @aibee/map2d-dev.
+    docs: null
+- family: AR indoor navigation
+  loader: npm
+  components:
+  - name: ArController
+    package: "@aibee/miniapp-ar-sdk"
+    docs: https://map.aibee.cn/sdk-docs/
+    docs_status: 200
+    kind: web / WeChat mini-program (camera AR overlay + 2D compass map)
+    mount: 'new ArController(place_id, container: HTMLElement, option)'
+    description: >-
+      All-scene AR wayfinding component. Renders a live-camera AR route overlay, a compass, a
+      map component beneath the compass, 3D models and particle effects, and drives PDR/VIO
+      indoor positioning. Aibee's news page describes this as China's first uninterrupted
+      full-scene AR navigation, including automatic floor detection across levels.
+    reference_sections:
+    - https://map.aibee.cn/sdk-docs/pages/guide/
+    - https://map.aibee.cn/sdk-docs/pages/common/constructor/
+    - https://map.aibee.cn/sdk-docs/pages/common/events/
+    - https://map.aibee.cn/sdk-docs/pages/common/methods/
+    - https://map.aibee.cn/sdk-docs/pages/map/
+    - https://map.aibee.cn/sdk-docs/pages/camera/
+    - https://map.aibee.cn/sdk-docs/pages/model/
+    - https://map.aibee.cn/sdk-docs/pages/particle/
+    constructor_options:
+      required:
+      - name: place_id
+        type: string|number
+        description: 场 id — the venue identifier
+      - name: container
+        type: Element
+        description: container the SDK renders AR, map and effects into
+      optional:
+      - name: preserveDrawingBuffer
+        type: boolean
+      - name: noMove
+        type: boolean
+      - name: noAr
+        type: boolean
+      - name: noMap
+        type: boolean
+      - name: arHeight
+        type: number
+        default: container.height*0.65
+      - name: trackType
+        type: string
+        default: pdr
+        description: positioning type
+      - name: socketToken
+        type: string
+      - name: navi_env
+        type: string
+        default: env
+      - name: arType
+        type: number
+        default: 1
+      - name: renderType
+        type: number
+        default: 2
+      - name: trackerUrl
+        type: string
+        description: VIO path
+    map_component_methods:
+    - clearMapPathRender
+    - addPoi
+    - getMapCenter
+    - setMapCenter
+    - disableCenter
+    - enableCenter
+    - getZoom
+    - zoomMap
+    - nearEnd
+    - setMapLookType
+    - setMapVisible
+    - setMapFullScreen
+    note: >-
+      The reference instructs `npm install @aibee/miniapp-ar-sdk`, but that package is not
+      published to the public npm registry (404) and the example clone URL is on Aibee's private
+      GitLab (https://code.aibee.cn/robot-fe/ar-sdk/miniapp-ar-sdk.git). The documentation is
+      public; the component itself is not obtainable without an Aibee account.
+- family: Native app host
+  loader: npm + CocoaPods/Gradle
+  components:
+  - name: NavWebview
+    package: "@aibee/rn-nav-sdk"
+    kind: React Native component (wraps react-native-webview)
+    mount: '<NavWebview source back searchConfig sdkConfig />'
+    description: >-
+      Third-party-integration React Native component that hosts an Aibee indoor-navigation H5
+      page and injects native device capability into it. Handles the handoff from outdoor Amap
+      (高德 GCJ-02) driving navigation to indoor wayfinding, preloading the indoor H5 when the
+      outdoor route has <= h5PreloadRemainingTimeThreshold seconds remaining (default 30).
+    props:
+    - name: source
+      required: true
+      type: WebViewProps['source']
+      note: auto find-my-car flow requires from=1 on the URL
+    - name: back
+      required: true
+      type: () => void
+    - name: searchConfig
+      required: true
+      type: "{ range, coordinates, parkingLotId? }"
+      note: range = indoor polygon vertices, coordinates = candidate targets, both GCJ-02
+    - name: sdkConfig
+      required: true
+      type: "{ gaodeAndroidAppKey, gaodeIOSAppKey, gaodeRegion? }"
+      note: Amap keys are obtained from the Amap open platform, not from Aibee; gaodeRegion is MAINLAND or HONG_KONG
+    - name: h5PreloadRemainingTimeThreshold
+      required: false
+      type: number
+      default: 30
+    exports:
+    - NavModule
+    - NavWebview
+    - GPSPositioningManager
+    - WebViewPreloadManager
+    - NavigationOrchestrator
+    - GeoUtils
+    - useBluetooth
+    - useIBeacon
+    - useKeepScreenOn
+    - usePermissions
+    platform_requirements:
+      ios:
+      - UIBackgroundModes = location (missing it triggers an assertion crash)
+      - NSLocationWhenInUseUsageDescription
+      - NSLocationAlwaysAndWhenInUseUsageDescription
+      - NSBluetoothAlwaysUsageDescription
+      - NSBluetoothPeripheralUsageDescription
+      peer_dependencies:
+        react: '>=19.2.3'
+        react-native: '>=0.85.0'
+        react-native-webview: '>=13.0.0'
+- family: JSBridge (H5 -> native)
+  loader: injected by NavWebview
+  components:
+  - name: window.AIBEENav
+    package: "@aibee/rn-nav-sdk"
+    kind: injected JavaScript bridge
+    description: >-
+      Promise-returning bridge the hosted H5 navigation page calls to reach native device
+      capability. Messages are posted over ReactNativeWebView.postMessage with a callbackId and
+      resolved/rejected on reply; native-side events are re-dispatched as window events and to
+      AIBEENav listeners. This is Aibee's only fully enumerated public interface contract.
+    methods:
+    - addEventListener
+    - back
+    - checkSystemLocationState
+    - enableAppBluetooth
+    - enableSystemBluetooth
+    - getAppBluetoothState
+    - getGPSPermissionStatus
+    - getKeepScreenOn
+    - getNearbyDevicesPermissionStatus
+    - getSystemBluetoothState
+    - isIBeaconScanning
+    - openAppSettings
+    - openSystemBluetoothSettings
+    - openSystemLocationSettings
+    - requestGPSPermission
+    - requestNearbyDevicesPermission
+    - setKeepScreenOn
+    - startIBeaconScan
+    - stopIBeaconScan
+    method_count: 19
+- family: VR / panorama
+  loader: npm
+  components:
+  - name: Owlly navigation
+    package: "@aibee/owlly-navigation"
+    kind: web (three.js + lottie)
+    description: >-
+      Navigation layer over the Owlly rendering toolkit, backed by Aibee panorama services
+      (vr.aibee.cn, robot-vr.aibee.cn, nav.aibee.cn/aether-walker/vr/list-panoramas).
+    docs: null

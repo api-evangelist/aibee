@@ -1,0 +1,143 @@
+generated: '2026-09-13'
+method: probed
+description: >-
+  Probe of the /.well-known/ discovery surface on every host this record knows: the registrable
+  domains and www hosts for both aibee.cn (current corporate site) and aibee.com (legacy site),
+  the observed API hosts, and the SDK docs host. Status is the HTTP code observed at fetch time.
+  NOTHING WAS FOUND: every path 404s on every host that answers honestly. ai.aibee.cn is a umi
+  single-page app with a catch-all route — it answers HTTP 200 with the same text/html SPA shell
+  for /.well-known/agent-card.json, /openapi.json and for a control path
+  (/zzz-nonexistent-probe-123) alike, so those 200s are recorded as present-but-not-a-document
+  and are NOT treated as hits. No WellKnown, SecurityTxt, APICatalog or AgentCard pointer is
+  emitted from this file, because no path returned a real document.
+control_probe:
+  url: https://ai.aibee.cn/zzz-nonexistent-probe-123
+  status: 200
+  content_type: text/html
+  result: SPA catch-all confirmed; every 200 on this host is the same shell
+hosts:
+- host: https://www.aibee.cn
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://aibee.cn
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://www.aibee.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://aibee.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://ai.aibee.cn
+  note: >-
+    umi SPA catch-all. Every path below returned HTTP 200 with the identical text/html shell,
+    including the control path. Treated as a miss on all seven documents.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    result: spa-shell-not-a-document
+- host: https://mall.aibee.cn
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+other_discovery_probes:
+- url: https://www.aibee.cn/robots.txt
+  status: 404
+- url: https://www.aibee.cn/sitemap.xml
+  status: 404
+- url: https://www.aibee.com/robots.txt
+  status: 200
+  result: "User-agent: * / Disallow: (empty disallow — nothing restricted)"
+- url: https://www.aibee.cn/llms.txt
+  status: 404
+- url: https://www.aibee.com/llms.txt
+  status: 404

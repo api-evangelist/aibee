@@ -64,5 +64,31 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aibee is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.hiive.com/securities/aibee-stock
+Aibee (爱笔智能) is a Beijing-based artificial-intelligence company, founded in November 2017 by
+Dr. Yuanqing Lin, that digitizes and automates physical commercial space — indoor 3D "reality
+maps", AR wayfinding, smart parking and find-my-car, and customer-flow analytics, packaged as
+AI Mall OS and AI Parking OS for shopping malls, parking garages, office towers, bank branches,
+automotive 4S dealerships, chain retail, airports, scenic areas and high-speed rail.
+
+Aibee's public developer surface is **client-side, not a REST platform**. There is no developer
+portal, no API reference, and no OpenAPI, GraphQL SDL, AsyncAPI, MCP server or A2A agent card.
+What it does publish:
+
+- **14 first-party npm packages** under the `@aibee` scope — indoor-map renderers, AR navigation,
+  a React Native navigation SDK built explicitly for third-party integration, and the Owlly
+  rendering toolkit. See [`packages/`](packages/aibee-packages.yml).
+- **A public SDK reference** at [map.aibee.cn/sdk-docs](https://map.aibee.cn/sdk-docs/) for the AR
+  navigation SDK, and a generated TypeDoc reference for
+  [`@aibee/bmap`](https://map.aibee.cn/sdk-docs/bmap/docs/).
+- **A reachable, undocumented HTTP surface**: the map-data endpoints on `deploy.aibee.cn` and
+  `guide-admin.aibee.cn` that the published `@aibee/bmap` SDK calls by absolute URL. Both answer
+  anonymously with JSON. No specification describes them and API Evangelist has not authored one.
+
+Two findings worth the reader's attention. The package the reference tells you to install,
+`@aibee/miniapp-ar-sdk`, is **not on the public npm registry** (HTTP 404) — the documentation is
+public but the artifact is not. And the package Aibee documents publicly, `@aibee/bmap`, last
+shipped 2024-07-10, while the undocumented customer build `@aibee/crc-bmap` shipped 2026-09-07.
+
+- Website: https://www.aibee.cn/
+- SDK docs: https://map.aibee.cn/sdk-docs/
+- News: https://www.aibee.cn/news.html

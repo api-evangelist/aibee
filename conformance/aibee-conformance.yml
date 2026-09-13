@@ -1,0 +1,70 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.aibee.cn/clause.html
+description: >-
+  Standards and compliance assertions. Aibee publishes no OpenAPI, so there is nothing to derive
+  conformance from; this file records what the search actually found and — more usefully — what
+  it did not. No certification, audit report, trust center or security program is published
+  anywhere on Aibee's public surface, so NO Compliance and NO TrustCenter pointer is emitted.
+  Domain-standard conformance is not asserted: indoor mapping and wayfinding has candidate
+  standards (OGC IndoorGML, IMDF) and Aibee's contract declares neither, but the surface carries
+  no contract at all, so this is a not-measured rather than a fail.
+entries:
+- id: pipl
+  name: Personal Information Protection Law of the PRC
+  conforms: true
+  evidence: https://www.aibee.cn/clause.html
+  detail: >-
+    The privacy policy states Aibee collects, uses and protects personal information under the
+    laws and regulations of the People's Republic of China (excluding Hong Kong, Macau and
+    Taiwan). The legal notice at https://www.aibee.cn/legal.html adds that, outside of data it
+    processes under a customer's instruction, Aibee does not itself collect, use, store,
+    transmit or disclose personal information, and that the customer issues its own privacy
+    text to data subjects. This is a self-declared legal posture, not an audited certification.
+- id: icp-filing
+  name: PRC ICP filing (MIIT)
+  conforms: true
+  evidence: https://beian.miit.gov.cn
+  detail: >-
+    Site footer carries filing 京ICP备18015220号 for 爱笔（北京）智能科技有限公司. A hosting
+    registration, recorded for jurisdiction signal only — it is not an API or security standard.
+- id: oauth2
+  conforms: false
+  evidence: https://map.aibee.cn/sdk-docs/
+  detail: No OAuth 2.0 surface; the reachable map-data endpoints answered anonymously.
+- id: oidc
+  conforms: false
+  evidence: https://www.aibee.cn/.well-known/openid-configuration
+  detail: 404 on every host probed; see well-known/aibee-well-known.yml.
+- id: rfc9457
+  conforms: false
+  evidence: errors/aibee-error-codes.yml
+  detail: >-
+    Errors use two inconsistent vendor envelopes ({error_no, error_msg, ...}), not
+    application/problem+json.
+- id: rfc8594
+  conforms: false
+  evidence: lifecycle/aibee-lifecycle.yml
+  detail: No Sunset or Deprecation header observed and no deprecation policy published.
+- id: idempotency
+  conforms: false
+  evidence: conventions/aibee-conventions.yml
+  detail: No replay-protection mechanism on any reachable surface.
+- id: pagination
+  conforms: false
+  evidence: conventions/aibee-conventions.yml
+  detail: No paging parameters or metadata observed.
+certifications_published: []
+searched:
+- url: https://www.aibee.cn/aboutus.html
+  status: 200
+  result: no ISO 27001 / SOC 2 / MLPS (等保) / certification claims
+- url: https://www.aibee.cn/technology.html
+  status: 200
+  result: no compliance or certification section
+- url: https://www.aibee.cn/legal.html
+  status: 200
+  result: legal notice, no certifications
+- url: https://www.aibee.cn/clause.html
+  status: 200
+  result: privacy policy under PRC law, no third-party audit referenced

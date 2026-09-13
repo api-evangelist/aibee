@@ -1,0 +1,31 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.aibee.cn/
+plan_count: 0
+plans: []
+model: enterprise-direct
+note: >-
+  Aibee publishes no plans, no price list and no self-serve signup. It sells AI Mall OS / AI
+  Parking OS as a deployed project to commercial-real-estate operators, retail chains, banks,
+  automotive dealerships, airports, scenic areas and rail operators — every solution page ends
+  in a contact form (https://www.wenjuan.com/s/UZBZJvBvA2/) rather than a price or a trial. The
+  SDKs in packages/aibee-packages.yml are free to download from npm but they are the client half
+  of a contracted deployment: they are constructed with a place_id for a venue Aibee has already
+  surveyed and mapped, so there is nothing a self-serve buyer could purchase to make them useful.
+  There is no pricing page to link and no Pricing pointer is emitted.
+searched:
+- url: https://www.aibee.cn/
+  status: 200
+  result: no pricing link in navigation or footer
+- url: https://www.aibee.cn/mall.html
+  status: 200
+  result: solution page, contact form only
+- url: https://www.aibee.cn/parking.html
+  status: 200
+  result: solution page, contact form only
+- url: https://www.aibee.com/
+  status: 200
+  result: legacy site, no pricing
+- url: https://map.aibee.cn/sdk-docs/
+  status: 200
+  result: SDK reference, no commercial terms

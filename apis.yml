@@ -1,23 +1,151 @@
 aid: aibee
 name: Aibee
-description: 'Aibee is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Aibee (爱笔智能, 爱笔（北京）智能科技有限公司) is a Beijing-based artificial-intelligence company founded in
+  November 2017 by Dr. Yuanqing Lin, the former head of Baidu Research, that digitizes and
+  automates physical commercial space. It fuses computer vision, multi-modal sensing, indoor
+  positioning, 3D reconstruction, speech and big-data analytics into AI Mall OS and AI Parking OS
+  — indoor 3D "reality maps", AR wayfinding, smart parking and find-my-car, and precise
+  footfall/customer-flow analytics — deployed across shopping malls, parking garages, office
+  towers, bank branches, automotive 4S dealerships, chain retail stores, airports, scenic areas
+  and high-speed-rail stations. Its public developer surface is client-side rather than a REST
+  platform: a first-party @aibee npm scope of indoor-map, AR-navigation and React Native
+  navigation SDKs, and a public SDK reference at map.aibee.cn. No OpenAPI, GraphQL SDL, MCP
+  server or agent card is published.
+position: Producing
+image: https://www.aibee.cn/logo-blue.9fb45835.png
 url: https://raw.githubusercontent.com/api-evangelist/aibee/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-13'
 modified: '2026-09-13'
 tags:
 - Company
-apis: []
+- Artificial Intelligence
+- Computer Vision
+- Indoor Mapping
+- Indoor Navigation
+- Augmented Reality
+- Retail Technology
+- Commercial Real Estate
+- Smart Parking
+- Location Services
+- SDK
+- China
+tags_raw:
+- company
+- artificial-intelligence
+- computer-vision
+- indoor-mapping
+- indoor-navigation
+- augmented-reality
+- retail-technology
+- commercial-real-estate
+- smart-parking
+- location-services
+- sdk
+- china
+apis:
+- name: Aibee BMap Indoor Map Data
+  description: >-
+    The hosted map-data surface behind Aibee's indoor map and wayfinding products. It is not
+    documented as a public API and has no published reference or specification; it is recorded
+    here because Aibee's own publicly distributed SDK, @aibee/bmap on npm, calls it by absolute
+    URL, and because both endpoints answer anonymously over HTTPS with JSON. Venue and floor
+    metadata comes from deploy.aibee.cn (/function/place-service/getPlacesInfo) and map
+    conversion/geometry from guide-admin.aibee.cn (/bmap/get_convert, /bmap/convert/getFloorData).
+    Everything is scoped by place_id and floor_id. No OpenAPI exists and none has been authored.
+  image: https://www.aibee.cn/logo-blue.9fb45835.png
+  humanURL: https://map.aibee.cn/sdk-docs/bmap/docs/
+  baseURL: https://deploy.aibee.cn
+  tags:
+  - Indoor Mapping
+  - Location Services
+  - Commercial Real Estate
+  tags_raw:
+  - indoor-mapping
+  - location-services
+  - commercial-real-estate
+  properties:
+  - type: APIReference
+    url: https://map.aibee.cn/sdk-docs/bmap/docs/
+  - type: Conventions
+    url: conventions/aibee-conventions.yml
+  - type: ErrorCatalog
+    url: errors/aibee-error-codes.yml
+- name: Aibee AR Navigation SDK
+  description: >-
+    Aibee's all-scene AR indoor-wayfinding SDK for web and WeChat mini-programs, published with a
+    full public reference (quickstart, constructor, events, methods, and the map, camera, model
+    and particle component APIs). An ArController is constructed with a place_id and a container
+    element and renders a live-camera AR route overlay, a compass, a 2D map and 3D/particle
+    effects over PDR or VIO indoor positioning, switching floors automatically. The reference is
+    public; the package itself (@aibee/miniapp-ar-sdk) is not on the public npm registry.
+  image: https://www.aibee.cn/logo-blue.9fb45835.png
+  humanURL: https://map.aibee.cn/sdk-docs/
+  baseURL: https://map.aibee.cn
+  tags:
+  - Augmented Reality
+  - Indoor Navigation
+  - SDK
+  tags_raw:
+  - augmented-reality
+  - indoor-navigation
+  - sdk
+  properties:
+  - type: Documentation
+    url: https://map.aibee.cn/sdk-docs/
+  - type: APIReference
+    url: https://map.aibee.cn/sdk-docs/pages/common/methods/
+  - type: GettingStarted
+    url: https://map.aibee.cn/sdk-docs/pages/guide/
+  - type: Components
+    url: components/aibee-components.yml
+x-enrichment:
+  date: '2026-09-13'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v3
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/aibee-domain-security.yml
 - type: Website
-  url: https://www.hiive.com/securities/aibee-stock
+  url: https://www.aibee.cn/
+- type: Documentation
+  url: https://map.aibee.cn/sdk-docs/
+- type: APIReference
+  url: https://map.aibee.cn/sdk-docs/bmap/docs/
+- type: GettingStarted
+  url: https://map.aibee.cn/sdk-docs/pages/guide/
+- type: Packages
+  url: packages/aibee-packages.yml
+- type: SDKs
+  url: packages/aibee-packages.yml
+- type: Components
+  url: components/aibee-components.yml
+- type: Conventions
+  url: conventions/aibee-conventions.yml
+- type: ErrorCatalog
+  url: errors/aibee-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/aibee-lifecycle.yml
+- type: Conformance
+  url: conformance/aibee-conformance.yml
+- type: Plans
+  url: plans/aibee-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/aibee-rate-limits.yml
+- type: LLMsTxt
+  url: llms/aibee-llms.txt
+- type: Blog
+  url: https://www.aibee.cn/news.html
+- type: TermsOfService
+  url: https://www.aibee.cn/legal.html
+- type: PrivacyPolicy
+  url: https://www.aibee.cn/clause.html

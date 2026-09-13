@@ -1,0 +1,96 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  packages/aibee-packages.yml — @aibee/rn-nav-sdk 1.0.3 src/types/errors.ts (published verbatim
+  in the npm tarball), plus two anonymous probes of the live map-data endpoints referenced by
+  @aibee/bmap 0.0.140.
+format: vendor
+description: >-
+  Aibee publishes no error reference page and no OpenAPI, so there is no RFC 9457
+  application/problem+json surface to derive. What IS published is (a) a concrete, enumerated
+  SDK error-code set shipped as TypeScript source inside @aibee/rn-nav-sdk, and (b) two distinct
+  JSON error envelopes observed on the live map-data hosts. Both are recorded here verbatim.
+  The HTTP envelopes below are OBSERVED on success responses (error_no 0 / 200); the failure
+  codes for those envelopes are not documented anywhere public and are deliberately NOT guessed.
+envelopes:
+- name: place-service envelope
+  host: https://deploy.aibee.cn
+  observed_on:
+    url: https://deploy.aibee.cn/function/place-service/getPlacesInfo?place_id=240
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-09-13'
+  shape:
+    error_no: integer — 0 observed on success
+    error_msg: string — empty string observed on success
+    func_exec_time: float — server-side execution seconds
+    data: array — the result payload
+  note: >-
+    No RFC 9457 fields (type/title/status/detail/instance). No request correlation id on this
+    host. HTTP status is 200 regardless; the application-level outcome lives in error_no.
+- name: guide-admin envelope
+  host: https://guide-admin.aibee.cn
+  observed_on:
+    url: https://guide-admin.aibee.cn/bmap/get_convert?place_id=240&hide=1
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-09-13'
+  shape:
+    request_id: string (UUID v4) — correlation id
+    error_no: integer — 200 observed on success
+    error_msg: string — "success" observed on success
+    data: array — the result payload
+  note: >-
+    Note the inconsistency between the two first-party hosts: success is error_no 0 on
+    deploy.aibee.cn and error_no 200 on guide-admin.aibee.cn, and only guide-admin returns a
+    request_id. A client cannot use one success test across Aibee's own surface.
+error_codes:
+- code: MODULE_NOT_FOUND
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  meaning: The native AibeeRnNav module is not linked into the host application.
+  action: Verify the pod install / Gradle build linked the native module, then rebuild the app.
+- code: BLUETOOTH_NOT_SUPPORTED
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  meaning: The device has no Bluetooth capability, so iBeacon indoor positioning cannot run.
+  action: Fall back to GPS/PDR positioning; do not start an iBeacon scan.
+- code: BLUETOOTH_DISABLED
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  meaning: Bluetooth is supported but switched off.
+  action: Call AIBEENav.enableSystemBluetooth() or openSystemBluetoothSettings() and retry.
+- code: PERMISSION_DENIED
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  meaning: A required runtime permission (location or nearby-devices) was refused.
+  action: >-
+    Call AIBEENav.requestGPSPermission() / requestNearbyDevicesPermission(); on a hard denial
+    route the user to AIBEENav.openAppSettings().
+- code: NO_ACTIVITY
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  platform: android
+  meaning: No current Android Activity was available to attach the permission or settings intent to.
+  action: Invoke the call from a mounted screen rather than a background task.
+- code: SCAN_FAILED
+  source_artifact: "@aibee/rn-nav-sdk src/types/errors.ts"
+  domain: react-native-sdk
+  meaning: The iBeacon scan could not be started or was terminated by the platform.
+  action: Check AIBEENav.isIBeaconScanning(), stop and restart the scan, verify Bluetooth state.
+error_shape:
+  class: NavException extends Error
+  fields:
+    code: NavErrorCode (one of the six above)
+    message: string
+    name: 'NavException'
+  rejection: >-
+    JSBridge calls return a Promise that rejects with new Error(message) when the native side
+    replies with an `error` field; the structured NavException is used on the native-module path.
+searched:
+- url: https://map.aibee.cn/sdk-docs/
+  status: 200
+  result: SDK reference has no error-code section
+- url: https://www.aibee.cn/
+  status: 200
+  result: corporate site has no developer or error documentation

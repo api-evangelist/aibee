@@ -1,0 +1,131 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  packages/aibee-packages.yml (@aibee/bmap 0.0.140, @aibee/rn-nav-sdk 1.0.3),
+  https://map.aibee.cn/sdk-docs/ and two anonymous probes of the live map-data hosts.
+description: >-
+  Cross-cutting runtime semantics for the only Aibee surfaces a third party can reach: the
+  hosted map-data endpoints the published @aibee/bmap SDK calls, and the AIBEENav JSBridge the
+  published @aibee/rn-nav-sdk injects. Aibee publishes no API reference, no OpenAPI and no
+  conventions document, so everything here is derived from first-party published SDK code plus
+  probed responses, and every gap is recorded as a gap rather than filled in.
+surfaces:
+- name: BMap map-data endpoints
+  transport: HTTPS GET, application/json
+  hosts:
+  - https://deploy.aibee.cn
+  - https://guide-admin.aibee.cn
+  documented_publicly: false
+  discovered_from: "@aibee/bmap 0.0.140 lib/index.js (Config.host.deploy / Config.host.guideAdmin)"
+  operations_observed:
+  - method: GET
+    url: https://deploy.aibee.cn/function/place-service/getPlacesInfo?place_id={place_id}
+    probe_status: 200
+  - method: GET
+    url: https://guide-admin.aibee.cn/bmap/get_convert?place_id={place_id}&hide=1
+    probe_status: 200
+  - method: GET
+    url: https://guide-admin.aibee.cn/bmap/convert/getFloorData?place_id={place_id}&from={from}
+    probe_status: not-probed
+- name: AIBEENav JSBridge
+  transport: ReactNativeWebView.postMessage (JSON), Promise-based
+  documented_publicly: true
+  docs: https://map.aibee.cn/sdk-docs/
+  method_count: 19
+  detail: components/aibee-components.yml
+auth_style:
+  model: none-observed
+  detail: >-
+    The two probed map-data endpoints answered anonymously — no API key, no bearer token, no
+    cookie, no Referer or Origin check defeated the probe. Aibee documents no authentication
+    scheme anywhere public. The AR SDK constructor accepts an undocumented `socketToken` option,
+    and the React Native SDK requires Amap (高德) application keys, but those are Amap's
+    credentials obtained from the Amap open platform, not Aibee credentials. No Authentication
+    artifact or pointer is emitted, because there is no documented auth model to describe.
+identifiers:
+  primary:
+  - name: place_id
+    meaning: 场 id — the venue (mall, garage, office tower, airport)
+    type: integer-as-string
+    example_published: 240, 268 (used in Aibee's own public SDK examples)
+  - name: floor_id
+    meaning: floor within a venue
+    type: integer-as-string
+    example_published: 1581
+  - name: convert_id
+    meaning: short opaque map-conversion id returned by guide-admin
+    type: string
+    example_observed: D0dF57
+  note: >-
+    Every public surface is scoped by place_id; there is no account, project or tenant
+    identifier in any observed request.
+pagination:
+  style: none-observed
+  detail: >-
+    Both probed endpoints return a complete `data` array with no limit/offset/cursor parameter
+    and no paging metadata. Undocumented; not asserted as absent for the whole surface.
+error_envelope:
+  detail: errors/aibee-error-codes.yml
+  summary: >-
+    Two inconsistent vendor envelopes. deploy.aibee.cn returns {error_no, error_msg,
+    func_exec_time, data} with error_no 0 on success; guide-admin.aibee.cn returns {request_id,
+    error_no, error_msg, data} with error_no 200 on success. Neither is RFC 9457.
+request_id:
+  supported: partial
+  field: request_id
+  scope:
+  - https://guide-admin.aibee.cn
+  detail: >-
+    guide-admin.aibee.cn returns a UUID v4 `request_id` on every response. deploy.aibee.cn does
+    not, so a caller cannot correlate a failure across Aibee's own two hosts.
+versioning:
+  api: none-observed
+  detail: >-
+    No version segment, header or query parameter appears in any observed request path
+    (/function/place-service/..., /bmap/...). Contrast nav.aibee.cn, whose SDK-referenced paths
+    carry /v1/ and /v3-hj/ segments, so versioning practice is inconsistent across hosts.
+  sdk: semver
+  sdk_detail: All 14 published @aibee npm packages use semantic versioning; see lifecycle/aibee-lifecycle.yml.
+rate_limit_signaling:
+  supported: unknown
+  detail: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header was returned on either successful probe,
+    and no limit is documented. See rate-limits/aibee-rate-limits.yml.
+field_expansion:
+  supported: none-observed
+metadata:
+  supported: none-observed
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  detail: >-
+    No replay-protection mechanism exists on any reachable Aibee surface. There is no
+    Idempotency-Key header, no client-supplied request token, and no documented retry
+    semantics. This is stated as `none` rather than `na` because the surface is not purely
+    read-only in principle — Aibee operates admin and BI consoles (guide-admin.aibee.cn,
+    mall.aibee.cn, ai.aibee.cn) whose write APIs sit behind a login we did not cross — but
+    nothing a third party can reach documents or provides idempotency. No Idempotency pointer
+    is emitted.
+dry_run_mode:
+  supported: none
+  detail: No test/sandbox mode, no simulation flag, no fixture tooling is published.
+reversibility:
+  grade: na
+  detail: >-
+    Every operation reachable and documented on Aibee's public surface is a read: the map-data
+    endpoints return venue, floor and conversion data, and the AIBEENav JSBridge methods
+    manipulate device state on the caller's own handset (Bluetooth, permissions, screen-on,
+    iBeacon scanning) rather than mutating any Aibee-held record. There is therefore no write
+    to reverse, no cancel/refund/void/undo/restore operation to document, and no window to
+    state. Marked `na` rather than `none`: an honest not-applicable, not a missing control.
+    Should Aibee publish its admin/console write APIs, this must be re-derived.
+  write_surface_found: false
+  reversal_operations: []
+cross_links:
+  errors: errors/aibee-error-codes.yml
+  lifecycle: lifecycle/aibee-lifecycle.yml
+  rate_limits: rate-limits/aibee-rate-limits.yml
+  components: components/aibee-components.yml
+  packages: packages/aibee-packages.yml

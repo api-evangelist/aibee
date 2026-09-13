@@ -1,0 +1,30 @@
+generated: '2026-09-13'
+method: probed
+source: https://deploy.aibee.cn/function/place-service/getPlacesInfo?place_id=240
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  Aibee publishes no rate limits. There is no API reference, no developer portal and no terms of
+  use for the map-data endpoints, so there is no documented quota to record. The two live
+  endpoints the published @aibee/bmap SDK calls were each fetched once, anonymously, and neither
+  response carried RateLimit-*, X-RateLimit-* or Retry-After. Absence of the headers on a single
+  successful response is not proof that no limit is enforced — it is proof that no runtime
+  rate-limit signal is offered to a client, which is the thing an agent needs. No further
+  requests were made to establish a threshold; probing a third party's endpoint until it refuses
+  is out of bounds for this pipeline.
+probed:
+- url: https://deploy.aibee.cn/function/place-service/getPlacesInfo?place_id=240
+  status: 200
+  result: no rate-limit headers present
+- url: https://guide-admin.aibee.cn/bmap/get_convert?place_id=240&hide=1
+  status: 200
+  result: no rate-limit headers present
+searched:
+- url: https://map.aibee.cn/sdk-docs/
+  status: 200
+  result: SDK reference documents no limits, quotas or throttling
+- url: https://www.aibee.cn/
+  status: 200
+  result: no developer terms or usage policy published

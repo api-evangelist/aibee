@@ -1,0 +1,92 @@
+generated: '2026-09-13'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=@aibee
+description: >-
+  Versioning, deprecation and operational-status posture. Aibee publishes no API versioning
+  policy, no deprecation policy, no Sunset/Deprecation header practice (RFC 8594), no SLA and
+  no status page. The only dated, provider-published lifecycle signal that exists is the npm
+  release history of the 14 first-party @aibee packages, recorded below. No StatusPage,
+  Deprecation or ChangeLog pointer is emitted, because none of those surfaces exists.
+versioning:
+  api:
+    scheme: none
+    detail: >-
+      Observed map-data paths carry no version segment or header. Paths referenced by
+      @aibee/owlly-navigation and @aibee/rn-nav-sdk do carry versions (/v1/health on
+      robot-vr.aibee.cn, /v3-hj/ on navigation.aibee.cn), so practice is inconsistent and
+      undocumented.
+  sdk:
+    scheme: semver
+    detail: All published @aibee packages version with semver; 9 of 14 are still pre-1.0.
+release_history:
+  registry: npm
+  scope: '@aibee'
+  package_count: 14
+  latest_release: '2026-09-11'
+  latest_release_package: "@aibee/rn-nav-sdk"
+  active_last_12_months:
+  - "@aibee/rn-nav-sdk"
+  - "@aibee/crc-bmap"
+  - "@aibee/owlly"
+  - "@aibee/owlly-navigation"
+  dormant_over_12_months:
+  - package: "@aibee/map2d-aibee"
+    last_published: '2025-05-06'
+  - package: "@aibee/map2d"
+    last_published: '2025-03-04'
+  - package: "@aibee/crc-bmap-vite-plugin"
+    last_published: '2025-08-13'
+  - package: "@aibee/map2d-dev"
+    last_published: '2024-09-27'
+  - package: "@aibee/bmap"
+    last_published: '2024-07-10'
+  - package: "@aibee/eve"
+    last_published: '2023-01-12'
+  - package: "@aibee/snapsvg"
+    last_published: '2023-01-12'
+  - package: "@aibee/vr-label-tool"
+    last_published: '2021-04-13'
+  - package: "@aibee/vr-workshop-devkit"
+    last_published: '2021-04-13'
+  - package: "@aibee/gltf-viewer"
+    last_published: '2021-04-13'
+  decay_signal: >-
+    @aibee/bmap is the package Aibee documents publicly (TypeDoc at
+    map.aibee.cn/sdk-docs/bmap/docs/) and it has not shipped since 2024-07-10, while the
+    undocumented customer build @aibee/crc-bmap shipped 2026-09-07 — the documented artifact is
+    two years behind the one actually being maintained. The scope as a whole is NOT abandoned:
+    the newest package, @aibee/rn-nav-sdk, first appeared 2026-06-24 and last shipped
+    2026-09-11.
+deprecation_policy:
+  published: false
+  sunset_header: not-observed
+  deprecation_header: not-observed
+  detail: >-
+    No deprecation or sunset policy is published, and no deprecated npm package or deprecated
+    SDK export was found. Neither probed response carried a Sunset or Deprecation header.
+status_page:
+  published: false
+  probed:
+  - url: https://www.aibee.cn/
+    status: 200
+    result: no status link in navigation or footer
+  detail: >-
+    No status.aibee.cn / status.aibee.com host and no status link anywhere on the corporate
+    site or the SDK docs.
+sla:
+  published: false
+support_lifecycle:
+  published: false
+site_lifecycle:
+  note: >-
+    Aibee runs two corporate sites in parallel. www.aibee.com is the legacy static build (its
+    footer still reads "Copyright © 2021", nginx/1.18.0) and www.aibee.cn is the current site
+    (nginx/1.20.1), whose own og:url points back at https://www.aibee.com/. Both answer 200.
+    The English site is served from www.aibee.cn/en/ and is the older layout.
+  probed:
+  - url: https://www.aibee.com/
+    status: 200
+  - url: https://www.aibee.cn/
+    status: 200
+  - url: https://www.aibee.cn/en/
+    status: 200

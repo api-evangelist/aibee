@@ -1,0 +1,204 @@
+generated: '2026-09-13'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=@aibee
+description: >-
+  First-party Aibee (爱笔智能) client libraries, published to the public npm registry under the
+  @aibee scope. Ownership is not inferred from the scope name: every package in the scope shares
+  the same six npm maintainers (jyfang, hujingn, wukang0718, kxiaoaibee, yfdjcxj, zcjia), and the
+  packages that declare a repository point at Aibee's own GitLab at https://code.aibee.cn
+  (robot-fe/map/bmap.git, ued/owlly), with author metadata of "Aibee Inc." and rpeng@aibee.com.
+  These are the map, indoor-navigation and AR SDKs behind Aibee's AI Mall OS / commercial
+  metaverse products. Aibee also operates a private registry at https://npm.aibee.cn (referenced
+  in the @aibee/bmap README and package scripts) which does not resolve publicly, so some SDKs
+  documented on map.aibee.cn — notably @aibee/miniapp-ar-sdk — are NOT on the public registry.
+  version + published read from registry.npmjs.org at fetch time.
+ownership_check:
+  registry_scope: '@aibee'
+  shared_maintainers:
+  - jyfang
+  - hujingn
+  - wukang0718
+  - kxiaoaibee
+  - yfdjcxj
+  - zcjia
+  first_party_evidence:
+  - '@aibee/bmap repository.url = https://code.aibee.cn/robot-fe/map/bmap.git'
+  - '@aibee/bmap author.email = rpeng@aibee.com'
+  - '@aibee/rn-nav-sdk author = "Aibee Inc."'
+  - '@aibee/owlly + @aibee/owlly-navigation repository.url = https://code.aibee.cn/ued/owlly'
+  - '@aibee/bmap README documentation URL = https://map.aibee.cn/sdk-docs/bmap/docs/ (live, HTTP 200)'
+packages:
+- language: javascript
+  registry: npm
+  name: "@aibee/rn-nav-sdk"
+  url: https://www.npmjs.com/package/@aibee/rn-nav-sdk
+  install: pnpm add @aibee/rn-nav-sdk react-native-webview
+  official: true
+  version: 1.0.3
+  published: '2026-09-11'
+  license: MIT
+  note: >-
+    React Native navigation SDK. Its own README describes it as "面向第三方接入" — built for
+    third-party integration — injecting native device capability (iBeacon scanning, Bluetooth,
+    GPS permissions, keep-screen-on) into an Aibee indoor-navigation H5 page hosted in a WebView
+    via the AIBEENav JSBridge. The most recently published package in the scope.
+- language: javascript
+  registry: npm
+  name: "@aibee/crc-bmap"
+  url: https://www.npmjs.com/package/@aibee/crc-bmap
+  official: true
+  version: 0.14.26
+  published: '2026-09-07'
+  license: ISC
+  note: >-
+    Customer-specific build of the BMap indoor-map renderer (three.js, turf, node-dijkstra
+    routing, mars3d heatmap). No description or repository declared on the registry.
+- language: javascript
+  registry: npm
+  name: "@aibee/owlly"
+  url: https://www.npmjs.com/package/@aibee/owlly
+  official: true
+  version: 1.0.29
+  published: '2026-07-02'
+  license: null
+  source: https://code.aibee.cn/ued/owlly
+  note: Core Owlly rendering/geometry toolkit the navigation SDK builds on.
+- language: javascript
+  registry: npm
+  name: "@aibee/owlly-navigation"
+  url: https://www.npmjs.com/package/@aibee/owlly-navigation
+  official: true
+  version: 1.0.37
+  published: '2026-07-02'
+  license: MIT
+  source: https://code.aibee.cn/ued/owlly
+  note: >-
+    Owlly SDK for navigation. Calls Aibee VR/panorama services at https://vr.aibee.cn,
+    https://robot-vr.aibee.cn/v1/health and https://nav.aibee.cn/aether-walker/vr/list-panoramas.
+- language: javascript
+  registry: npm
+  name: "@aibee/map2d-aibee"
+  url: https://www.npmjs.com/package/@aibee/map2d-aibee
+  official: true
+  version: 0.0.182
+  published: '2025-05-06'
+  license: ISC
+  note: 2D map editor/renderer built on OpenLayers, turf and dxf-parser (floor-plan ingest).
+- language: javascript
+  registry: npm
+  name: "@aibee/map2d"
+  url: https://www.npmjs.com/package/@aibee/map2d
+  official: true
+  version: 1.0.141
+  published: '2025-03-04'
+  license: null
+- language: javascript
+  registry: npm
+  name: "@aibee/crc-bmap-vite-plugin"
+  url: https://www.npmjs.com/package/@aibee/crc-bmap-vite-plugin
+  official: true
+  version: 0.0.4
+  published: '2025-08-13'
+  note: Vite plugin that fixes import.meta.url resolution for the crc-bmap build.
+- language: javascript
+  registry: npm
+  name: "@aibee/map2d-dev"
+  url: https://www.npmjs.com/package/@aibee/map2d-dev
+  official: true
+  version: 0.0.49
+  published: '2024-09-27'
+- language: javascript
+  registry: npm
+  name: "@aibee/bmap"
+  url: https://www.npmjs.com/package/@aibee/bmap
+  install: npm install @aibee/bmap
+  official: true
+  version: 0.0.140
+  published: '2024-07-10'
+  license: MIT
+  source: https://code.aibee.cn/robot-fe/map/bmap.git
+  docs: https://map.aibee.cn/sdk-docs/bmap/docs/
+  note: >-
+    "Aibee standard map sdk" — the 3D indoor map renderer (three.js), floor switching, POI
+    layers, heatmaps and turn-by-turn navigation overlay. Constructed with place_id + floor_id
+    and loads its data from https://deploy.aibee.cn and https://guide-admin.aibee.cn. Ships a
+    generated TypeDoc reference which Aibee publishes publicly.
+- language: javascript
+  registry: npm
+  name: "@aibee/eve"
+  url: https://www.npmjs.com/package/@aibee/eve
+  official: true
+  version: 0.5.4
+  published: '2023-01-12'
+  note: Small custom-event helper used by the map SDKs.
+- language: javascript
+  registry: npm
+  name: "@aibee/snapsvg"
+  url: https://www.npmjs.com/package/@aibee/snapsvg
+  official: true
+  version: 0.5.5
+  published: '2023-01-12'
+  note: >-
+    Aibee-maintained republish of the Adobe Snap.svg vector library (upstream
+    https://github.com/adobe-webplatform/Snap.svg), vendored as a dependency of @aibee/owlly.
+    First-party publication, third-party code.
+- language: javascript
+  registry: npm
+  name: "@aibee/vr-label-tool"
+  url: https://www.npmjs.com/package/@aibee/vr-label-tool
+  official: true
+  version: 0.5.17
+  published: '2021-04-13'
+  note: VR annotation tool assembled from @aibee/vr-workshop-devkit. Dormant since 2021.
+- language: javascript
+  registry: npm
+  name: "@aibee/vr-workshop-devkit"
+  url: https://www.npmjs.com/package/@aibee/vr-workshop-devkit
+  official: true
+  version: 0.5.16
+  published: '2021-04-13'
+  note: Offline annotation toolkit built on Owlly. Dormant since 2021.
+- language: javascript
+  registry: npm
+  name: "@aibee/gltf-viewer"
+  url: https://www.npmjs.com/package/@aibee/gltf-viewer
+  official: true
+  version: 1.0.1
+  published: '2021-04-13'
+  note: glTF model preview tool. Dormant since 2021.
+not_published_publicly:
+- name: "@aibee/miniapp-ar-sdk"
+  registry: npm
+  version: null
+  published: null
+  status: 404 on registry.npmjs.org
+  docs: https://map.aibee.cn/sdk-docs/
+  source: https://code.aibee.cn/robot-fe/ar-sdk/miniapp-ar-sdk.git
+  note: >-
+    Aibee publishes a full public reference for this AR-navigation SDK at map.aibee.cn/sdk-docs/
+    — constructor, events, methods, map/camera/model/particle APIs — and the install instruction
+    in that reference is "npm install @aibee/miniapp-ar-sdk". The package is NOT on the public
+    npm registry (HTTP 404) and its source repo is on Aibee's private GitLab, so a reader who
+    follows the published quickstart cannot actually install it. Recorded as an honest gap, not
+    a guess.
+registries_checked:
+- registry: npm
+  url: https://registry.npmjs.org/-/v1/search?text=@aibee
+  status: 200
+  result: 14 first-party packages in the @aibee scope
+- registry: pypi
+  url: https://pypi.org/pypi/aibee/json
+  status: 404
+  result: no package
+- registry: crates.io
+  url: https://crates.io/api/v1/crates?q=aibee
+  status: 200
+  result: 0 crates
+- registry: rubygems
+  url: https://rubygems.org/api/v1/search.json?query=aibee
+  status: 200
+  result: 0 gems
+- registry: npm (private)
+  url: https://npm.aibee.cn
+  status: 000
+  result: DNS does not resolve publicly; referenced by @aibee/bmap publish scripts

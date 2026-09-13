@@ -1,0 +1,27 @@
+generated: '2026-09-13'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.aibee.cn
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Mar  7 23:59:59 2027 GMT
+  hsts: false
+- host: map.aibee.cn
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Mar  7 23:59:59 2027 GMT
+  hsts: false
+- host: deploy.aibee.cn
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Mar  7 23:59:59 2027 GMT
+  hsts: false
+domains:
+- domain: aibee.cn
+  dnssec: true
+  caa:
+  - aibee.cn.a.bdydns.com.
+  - opencdn.jomodns.com.
+  spf: false
+  dmarc: false
