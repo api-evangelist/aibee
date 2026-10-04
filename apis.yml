@@ -23,7 +23,7 @@ modified: '2026-09-13'
 tags:
 - Company
 - Artificial Intelligence
-- Computer-Vision
+- Computer Vision
 - Indoor Mapping
 - Indoor Navigation
 - Augmented Reality
@@ -46,6 +46,7 @@ tags_raw:
 - location-services
 - sdk
 - china
+- Computer-Vision
 apis:
 - name: Aibee BMap Indoor Map Data
   description: >-
