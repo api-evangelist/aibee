@@ -64,31 +64,102 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aibee (爱笔智能) is a Beijing-based artificial-intelligence company, founded in November 2017 by
-Dr. Yuanqing Lin, that digitizes and automates physical commercial space — indoor 3D "reality
-maps", AR wayfinding, smart parking and find-my-car, and customer-flow analytics, packaged as
-AI Mall OS and AI Parking OS for shopping malls, parking garages, office towers, bank branches,
-automotive 4S dealerships, chain retail, airports, scenic areas and high-speed rail.
+Aibee (爱笔智能, 爱笔（北京）智能科技有限公司) is a Beijing-based artificial-intelligence company founded in November 2017 by Dr. Yuanqing Lin, the former head of Baidu Research, that digitizes and automates physical commercial space. It fuses computer vision, multi-modal sensing, indoor positioning, 3D reconstruction, speech and big-data analytics into AI Mall OS and AI Parking OS — indoor 3D "reality maps", AR wayfinding, smart parking and find-my-car, and precise footfall/customer-flow analytics — deployed across shopping malls, parking garages, office towers, bank branches, automotive 4S dealerships, chain retail stores, airports, scenic areas and high-speed-rail stations. Its public developer surface is client-side rather than a REST platform: a first-party @aibee npm scope of indoor-map, AR-navigation and React Native navigation SDKs, and a public SDK reference at map.aibee.cn. No OpenAPI, GraphQL SDL, MCP server or agent card is published.
 
-Aibee's public developer surface is **client-side, not a REST platform**. There is no developer
-portal, no API reference, and no OpenAPI, GraphQL SDL, AsyncAPI, MCP server or A2A agent card.
-What it does publish:
+**Areas:** Company · Artificial Intelligence · Computer Vision · Indoor Mapping · Indoor Navigation · Augmented Reality · Retail Technology · Commercial Real Estate · Smart Parking · Location Services · SDK · China
 
-- **14 first-party npm packages** under the `@aibee` scope — indoor-map renderers, AR navigation,
-  a React Native navigation SDK built explicitly for third-party integration, and the Owlly
-  rendering toolkit. See [`packages/`](packages/aibee-packages.yml).
-- **A public SDK reference** at [map.aibee.cn/sdk-docs](https://map.aibee.cn/sdk-docs/) for the AR
-  navigation SDK, and a generated TypeDoc reference for
-  [`@aibee/bmap`](https://map.aibee.cn/sdk-docs/bmap/docs/).
-- **A reachable, undocumented HTTP surface**: the map-data endpoints on `deploy.aibee.cn` and
-  `guide-admin.aibee.cn` that the published `@aibee/bmap` SDK calls by absolute URL. Both answer
-  anonymously with JSON. No specification describes them and API Evangelist has not authored one.
+## Aibee on APIs.io
 
-Two findings worth the reader's attention. The package the reference tells you to install,
-`@aibee/miniapp-ar-sdk`, is **not on the public npm registry** (HTTP 404) — the documentation is
-public but the artifact is not. And the package Aibee documents publicly, `@aibee/bmap`, last
-shipped 2024-07-10, while the undocumented customer build `@aibee/crc-bmap` shipped 2026-09-07.
+Everything profiled for Aibee is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aibee/](https://apis.io/providers/aibee/)** — or go straight to one of the APIs or properties below.
 
-- Website: https://www.aibee.cn/
-- SDK docs: https://map.aibee.cn/sdk-docs/
-- News: https://www.aibee.cn/news.html
+### APIs (2)
+
+- [Aibee BMap Indoor Map Data](https://apis.io/apis/aibee/aibee-bmap-indoor-map-data/) — The hosted map-data surface behind Aibee's indoor map and wayfinding products. It is not documented as a public API and has no published reference or…
+- [Aibee AR Navigation SDK](https://apis.io/apis/aibee/aibee-ar-navigation-sdk/) — Aibee's all-scene AR indoor-wayfinding SDK for web and WeChat mini-programs, published with a full public reference (quickstart, constructor, events,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Aibee Domain Security](https://apis.io/security/aibee/aibee-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Aibee Plans Pricing](https://apis.io/plans/aibee/aibee-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Aibee Rate Limits](https://apis.io/rate-limits/aibee/aibee-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aibee.cn/)
+- [Documentation](https://map.aibee.cn/sdk-docs/)
+- [Getting started](https://map.aibee.cn/sdk-docs/pages/guide/)
+- [API reference](https://map.aibee.cn/sdk-docs/bmap/docs/)
+- [Blog](https://www.aibee.cn/news.html)
+- [Terms of service](https://www.aibee.cn/legal.html)
+- [Privacy policy](https://www.aibee.cn/clause.html)
+
+## API Evangelist rating
+
+**Kin Score 18.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 21.1 |
+
+**Agent readiness 3.2** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aibee/](https://apis.io/providers/aibee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Aibee: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aibee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
